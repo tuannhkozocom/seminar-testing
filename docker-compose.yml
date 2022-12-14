@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  app:
+  php:
     build: 
       context: .
       dockerfile: ./.docker/php/Dockerfile
@@ -23,7 +23,7 @@ services:
       - ./:/var/www
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
     depends_on:
-      - app 
+      - php 
     networks:
       - app-network
 
