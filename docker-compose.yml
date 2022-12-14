@@ -1,0 +1,48 @@
+version: '3.7'
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    container_name: php
+    volumes:
+      - ./:/var/www
+      - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    depends_on:
+      - mysql
+    networks: 
+      - app-network
+
+  server:
+    image: nginx:alpine
+    container_name: server
+    ports:
+      - "9000:80"
+      - "9001:443"
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app 
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    env_file:
+      - .docker.env
+    networks: 
+      - app-network
+
+volumes:
+  dbdata:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
