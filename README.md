@@ -7,8 +7,8 @@
 
 2. Create user in laravel
 * if you don't want to use `root` account, follow the below command:
-- `CREATE USER 'tuannh'@'localhost' IDENTIFIED BY 'tuannh';`
-- `GRANT ALL ON *.* TO 'username'@'localhost'`
+- `CREATE USER 'dev'@'localhost' IDENTIFIED BY 'dev';`
+- `GRANT ALL ON *.* TO 'dev'@'localhost'`
 
 3. Feature:
 - Testing
