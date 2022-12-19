@@ -22,4 +22,4 @@ USER www
 COPY . /var/www
 
 EXPOSE 9000
-# CMD ["php-fpm"]
+CMD ["php-fpm"]
