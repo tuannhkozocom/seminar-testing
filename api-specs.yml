@@ -1,0 +1,43 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/TUANNH/Seminar-testing/1.0.0
+info:
+  version: "1.0.0"
+  title: seminar-api
+  description: The API for testing
+
+paths:
+  api/users:
+    get:
+      tags:
+        - User
+      description: returns all users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+    
