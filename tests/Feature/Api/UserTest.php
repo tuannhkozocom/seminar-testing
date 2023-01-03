@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Api;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Services\PaymentService;
+use Mockery\MockInterface;
 use Spectator\Spectator;
 use Tests\TestCase;
 
@@ -14,16 +14,17 @@ class UserTest extends TestCase
         parent::setUp();
         Spectator::using('api-specs.yml');
     }
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+
+    public function test_get_all_users()
     {
-        $response = $this->get('/api/users');
+        $mock = $this->mock(PaymentService::class, function (MockInterface $mock) {
+            $mock->shouldReceive('getCreditCard')
+                ->andReturn('1111111111111111');
+        });
+        $response = $this->getJson('/api/users');
         $response->assertValidRequest()
             ->assertValidResponse();
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertJsonPath('0.credit_number', '1111111111111111');
     }
 }

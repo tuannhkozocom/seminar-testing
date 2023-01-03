@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\UploadFileController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,12 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('users', function () {
-    return response()->json([
-        [
-            'id' => '1',
-            'name' => 'Nguyen Huu Tuan',
-            'email' => 'tuannh@kozo-japan.com',
-        ]
-    ]);
-});
+Route::get('users', [UserController::class, 'index']);
+Route::post('upload-file', [UploadFileController::class, 'upload']);
