@@ -9,7 +9,7 @@ info:
   description: The API for testing
 
 paths:
-  api/users:
+  "/api/users":
     get:
       tags:
         - User
@@ -23,7 +23,26 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
-
+  "/api/users/{id}":
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+          format: uuid
+        required: true
+    get:
+      tags:
+        - User
+      description: get user detail
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+              
 components:
   schemas:
     User:
@@ -35,9 +54,9 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         name:
           type: string
         email:
           type: string
           format: email
-    

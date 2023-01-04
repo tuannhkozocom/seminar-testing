@@ -18,4 +18,11 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_a_welcome_view_can_be_rendered()
+    {
+        $view = $this->view('welcome', ['greeting' => 'Hello Kozocom']);
+
+        $view->assertSee('Hello Kozocom');
+    }
 }

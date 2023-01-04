@@ -39,6 +39,16 @@ services:
     networks: 
       - app-network
 
+  mysql-testing:
+    image: mysql
+    container_name: mysql-testing
+    ports:
+      - "3308:3306"
+    env_file:
+      - .docker.env
+    networks: 
+      - app-network
+
 volumes:
   dbdata:
     driver: local

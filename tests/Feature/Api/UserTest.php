@@ -27,4 +27,12 @@ class UserTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonPath('0.credit_number', '1111111111111111');
     }
+
+    public function test_get_user_detail()
+    {
+        $response = $this->getJson('/api/users/00000000-0000-4000-8000-000000000000');
+        $response->assertValidRequest()
+            ->assertValidResponse();
+        $response->assertStatus(200);
+    }
 }
